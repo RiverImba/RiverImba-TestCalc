@@ -18,24 +18,24 @@ var intToRoman = []string{
 	"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
 }
 
-// Основная функция
+
 func main() {
 	reader := bufio.NewReader(os.Stdin)
 
 	for {
 		fmt.Print("Input (or type 'q' to quit): ")
 
-		// Считываем строку ввода
+		// Read user input
 		input, _ := reader.ReadString('\n')
 		input = strings.TrimSpace(input)
 
-		// Проверяем, хочет ли пользователь выйти
+		// q to exit
 		if input == "q" {
 			fmt.Println("Exiting...")
 			break
 		}
 
-		// Используем регулярное выражение для разбивки строки на операнды и оператор
+		// Regular fo input
 		parts := splitByOperators(input)
 
 		if len(parts) != 3 {
@@ -45,18 +45,12 @@ func main() {
 
 		operand1, operator, operand2 := parts[0], parts[1], parts[2]
 
-		// Определяем тип чисел (арабские или римские)
 		isRomanOperands := isRoman(operand1) && isRoman(operand2)
-		isArabicOperands := !isRoman(operand1) && !isRoman(operand2)
+		isArabicOperands := isArabic(operand1) && isArabic(operand2)
 
-		if isRomanOperands && !(isRoman(operand1) || !isRoman(operand2)) {
-			fmt.Println("Выдача паники, так как используются одновременно разные системы счисления.")
-			continue
-		}
-
-		if isArabicOperands && (!isArabic(operand1) || !isArabic(operand2)) {
-			fmt.Println("Выдача паники, так как используются одновременно разные системы счисления.")
-			continue
+		if !isRomanOperands && !isArabicOperands {
+    		fmt.Println("Выдача паники, так как используются одновременно разные системы счисления.")
+    		continue
 		}
 
 		var num1, num2 int
@@ -92,22 +86,22 @@ func main() {
 	}
 }
 
-// splitByOperators разбивает строку на части по операторам
+// splitByOperators separate input by regex
 func splitByOperators(s string) []string {
 	var parts []string
 	re := regexp.MustCompile(`\s*(\d+|[IVX]+)\s*([\+\-\*/])\s*(\d+|[IVX]+)\s*`)
 	matches := re.FindStringSubmatch(s)
 
 	if len(matches) == 4 {
-		parts = append(parts, matches[1]) // первый операнд
-		parts = append(parts, matches[2]) // оператор
-		parts = append(parts, matches[3]) // второй операнд
+		parts = append(parts, matches[1])
+		parts = append(parts, matches[2])
+		parts = append(parts, matches[3])
 	}
 
 	return parts
 }
 
-// romanToIntValue преобразует римскую цифру в арабское число
+// romanToIntValue convert rome value to arabic
 func romanToIntValue(s string) (int, error) {
 	value, ok := romanToInt[s]
 	if !ok {
@@ -116,7 +110,7 @@ func romanToIntValue(s string) (int, error) {
 	return value, nil
 }
 
-// intToRomanValue преобразует арабское число в римскую цифру
+// intToRomanValue arabic to rome
 func intToRomanValue(num int) string {
 	if num < 1 || num > 10 {
 		return ""
@@ -124,7 +118,7 @@ func intToRomanValue(num int) string {
 	return intToRoman[num]
 }
 
-// performOperation выполняет арифметическую операцию
+// performOperation Evaluating the exoression
 func performOperation(a, b int, op string) int {
 	switch op {
 	case "+":
@@ -151,7 +145,6 @@ func isRoman(s string) bool {
 	return exists
 }
 
-// isArabic проверяет, является ли строка арабским числом
 func isArabic(s string) bool {
 	_, err := strconv.Atoi(s)
 	return err == nil
