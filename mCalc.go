@@ -45,10 +45,18 @@ func main() {
 
 		operand1, operator, operand2 := parts[0], parts[1], parts[2]
 
+
+		if (!isArabic(operand1) && !isRoman(operand1)) || (!isArabic(operand2) && !isRoman(operand2)){
+			fmt.Println("Римское число не является верным или выходит из диапазона I - X")
+		}
+
 		isRomanOperands := isRoman(operand1) && isRoman(operand2)
 		isArabicOperands := isArabic(operand1) && isArabic(operand2)
 
+
+
 		if !isRomanOperands && !isArabicOperands {
+			//if isArabicOperands {}
     		fmt.Println("Выдача паники, так как используются одновременно разные системы счисления.")
     		continue
 		}
