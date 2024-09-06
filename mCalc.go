@@ -82,7 +82,7 @@ func main() {
 			if result > 3999 {
 				fmt.Println("Число в римском исчисление не может привышать 3999, текущее %s", result)
 			}
-			fmt.Println("Результат:", intToRomanValue(result))
+			fmt.Println("Результат:", integerToRoman(result))
 		} else {
 			fmt.Println("Результат:", result)
 		}
@@ -157,7 +157,7 @@ func integerToRoman(number int) string {
 	maxRomanNumber := 3999
 	if number > maxRomanNumber {
 		//fmt.Println("Число %s превышает значениe %s для римского исчисления", number, maxRomanNumber)
-		return nil
+		return strconv.Itoa(number)
 	}
 
 	// if number < 1 {
