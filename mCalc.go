@@ -79,6 +79,9 @@ func main() {
 				fmt.Println("Выдача паники, так как в римской системе нет отрицательных чисел или нуля.")
 				continue
 			}
+			if result > 3999 {
+				fmt.Println("Число в римском исчисление не может привышать 3999, текущее %s", result)
+			}
 			fmt.Println("Результат:", intToRomanValue(result))
 		} else {
 			fmt.Println("Результат:", result)
@@ -153,8 +156,14 @@ func isArabic(s string) bool {
 func integerToRoman(number int) string {
 	maxRomanNumber := 3999
 	if number > maxRomanNumber {
-		fmt.Println("Число %s превышает значеник %s", number, maxRomanNumber)
+		//fmt.Println("Число %s превышает значениe %s для римского исчисления", number, maxRomanNumber)
+		return nil
 	}
+
+	// if number < 1 {
+	// 	fmt.Println("Число %s меньше единици для римского исчисления", number)
+	// 	return nil
+	// }
 
 	conversions := []struct {
 		value int
