@@ -108,10 +108,12 @@ func main() {
 // splitByOperators separate input by regex
 func splitByOperators(s string) []string {
 	var parts []string
-	re := regexp.MustCompile(`\s*(\d+|[IVX]+)\s*([\+\-\*/])\s*(\d+|[IVX]+)\s*`)
+	re := regexp.MustCompile(`^\s*(\d+|[IVX]+)\s*([\+\-\*/])\s*(\d+|[IVX]+)\s*(\S*)`)
 	matches := re.FindStringSubmatch(s)
 
-	if len(matches) == 4 {
+	fmt.Println("len of matches %d", len(matches))
+
+	if len(matches) == 5 && matches[4] == "" {
 		parts = append(parts, matches[1])
 		parts = append(parts, matches[2])
 		parts = append(parts, matches[3])
