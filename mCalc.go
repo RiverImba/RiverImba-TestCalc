@@ -96,7 +96,7 @@ func main() {
 				continue
 			}
 			if result > 3999 {
-				fmt.Println("Число в римском исчисление не может привышать 3999, текущее %s", result)
+				fmt.Println("Число в римском исчисление не может привышать 3999, текущее %d", result)
 			}
 			fmt.Println("Результат:", integerToRoman(result))
 		} else {
