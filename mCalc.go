@@ -43,6 +43,9 @@ func main() {
 			continue
 		}
 
+		for index, part := range parts {
+			fmt.Printf("Index: %d, Fruit: %s\n", index, part)
+		}
 		operand1, operator, operand2 := parts[0], parts[1], parts[2]
 
 
@@ -68,7 +71,7 @@ func main() {
 		if isArabicOperands {
 			num1, err1 = strconv.Atoi(operand1)
 			num2, err2 = strconv.Atoi(operand2)
-			if inRange(num1) || inRange(num2) {
+			if outRange(num1) || outRange(num2) {
 				fmt.Println("Операнд вне диапазона 1 - 10")
 				continue
 			}
@@ -166,8 +169,8 @@ func isArabic(s string) bool {
 	return err == nil
 }
 
-func inRange(num int) bool{
-	return 1 <= num || num >= 10
+func outRange(num int) bool{
+	return 1 > num || num > 10
 }
 
 func integerToRoman(number int) string {
