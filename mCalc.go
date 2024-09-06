@@ -111,7 +111,7 @@ func splitByOperators(s string) []string {
 	re := regexp.MustCompile(`^\s*(\d+|[IVX]+)\s*([\+\-\*/])\s*(\d+|[IVX]+)\s*(\S*)`)
 	matches := re.FindStringSubmatch(s)
 
-	fmt.Println("len of matches %d", len(matches))
+	fmt.Printf("len of matches %d\n", len(matches))
 
 	if len(matches) == 5 && matches[4] == "" {
 		parts = append(parts, matches[1])
