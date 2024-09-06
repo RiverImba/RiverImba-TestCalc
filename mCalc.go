@@ -50,7 +50,7 @@ func main() {
 
 
 		if (!isArabic(operand1) && !isRoman(operand1)) || (!isArabic(operand2) && !isRoman(operand2)){
-			fmt.Println("Римское число не является верным или выходит из диапазона I - X")
+			fmt.Println("Римское число не является верным или выходит за рамки диапазона I - X")
 			continue
 		}
 
@@ -96,7 +96,7 @@ func main() {
 				continue
 			}
 			if result > 3999 {
-				fmt.Println("Число в римском исчисление не может привышать 3999, текущее %d", result)
+				fmt.Printf("Число в римском исчисление не может привышать 3999, текущее %d", result)
 			}
 			fmt.Println("Результат:", integerToRoman(result))
 		} else {
