@@ -48,6 +48,7 @@ func main() {
 
 		if (!isArabic(operand1) && !isRoman(operand1)) || (!isArabic(operand2) && !isRoman(operand2)){
 			fmt.Println("Римское число не является верным или выходит из диапазона I - X")
+			continue
 		}
 
 		isRomanOperands := isRoman(operand1) && isRoman(operand2)
@@ -67,6 +68,10 @@ func main() {
 		if isArabicOperands {
 			num1, err1 = strconv.Atoi(operand1)
 			num2, err2 = strconv.Atoi(operand2)
+			if inRange(num1) || inRange(num2) {
+				fmt.Println("Операнд вне диапазона 1 - 10")
+				continue
+			}
 		} else if isRomanOperands {
 			num1, err1 = romanToIntValue(operand1)
 			num2, err2 = romanToIntValue(operand2)
@@ -122,12 +127,12 @@ func romanToIntValue(s string) (int, error) {
 }
 
 // intToRomanValue arabic to rome
-func intToRomanValue(num int) string {
-	if num < 1 || num > 10 {
-		return ""
-	}
-	return intToRoman[num]
-}
+// func intToRomanValue(num int) string{
+// 	if num < 1 || num > 10 {
+// 		return ""
+// 	}
+// 	return intToRoman[num]
+// }
 
 // performOperation Evaluating the exoression
 func performOperation(a, b int, op string) int {
@@ -159,6 +164,10 @@ func isRoman(s string) bool {
 func isArabic(s string) bool {
 	_, err := strconv.Atoi(s)
 	return err == nil
+}
+
+func inRange(num int) bool{
+	return 1 <= num || num >= 10
 }
 
 func integerToRoman(number int) string {
